@@ -1,0 +1,66 @@
+openapi: '3.0.3'
+info:
+  version: 1.0.0
+  title: Simple Financial Products
+servers:
+  - url: http://localhost/8082/api/v1
+paths:
+  /financial-products/{cic}:
+    get:
+      summary: "Retrieve Financial Products"
+      description: "Returns a financial products"
+      operationId: "getFinancialProducts"
+      parameters:
+        - name: cic
+          in: path
+          description: Código único para identificar al cliente.
+          required: true
+          schema:
+            type: string
+            maxLength: 8
+            pattern: "^[a-zA-Z0-9]{8}$"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialProductsResponse'
+        "400":
+          description: Bad Request
+components:
+  schemas:
+    CustomerHeaders:
+      type: object
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          example: "String"
+    FinancialProducts:
+      type: object
+      properties:
+        productType:
+          type: string
+          example: "cuenta"
+        nombre:
+          type: string
+          example: "corriente Soles"
+        saldo:
+          type: string
+          example: "999.99"
+        code:
+          type: string
+          example: "01"
+    FinancialProductsResponse:
+      type: object
+      properties:
+        cic:
+          type: string
+          example: "12345678"
+        products:
+          type: array
+          description: "Lista de productos financieros"
+          items:
+            $ref: '#/components/schemas/FinancialProducts'

@@ -1,0 +1,46 @@
+openapi: '3.0.3'
+info:
+  version: 1.0.0
+  title: Simple Encrypt Service
+servers:
+  - url: http://localhost/8084/api/v1
+paths:
+  /encrypt:
+    post:
+      summary: "Encrypt a String"
+      description: "Returns a String encrypted"
+      operationId: "encryptString"
+      parameters:
+        - name: data
+          in: query
+          description: Código único para identificar al cliente.
+          required: true
+          schema:
+            type: string
+            maxLength: 40
+            pattern: "^[a-zA-Z0-9]{5}$"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncriptResponse'
+        "400":
+          description: Bad Request
+components:
+  schemas:
+    EncriptHeaders:
+      type: object
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          example: "String"
+    EncriptResponse:
+      type: object
+      properties:
+        encryptedString:
+          type: string
+          example: "zMZxRwNTTOXbwEMb"

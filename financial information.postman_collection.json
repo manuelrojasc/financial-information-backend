@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "56fc2dd2-f7bf-4b84-8aae-09c5b73ca86a",
+		"name": "financial information",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "requestDate",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "caller-name",
+						"value": "POSTMAN",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/v1/customer/12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"12345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFinancialProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "requestDate",
+						"value": "2020-11-16T17:15:20.509-0400",
+						"type": "text"
+					},
+					{
+						"key": "caller-name",
+						"value": "POSTMAN",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/api/v1/financial-products/12345678",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"financial-products",
+						"12345678"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerFinancialProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "requestDate",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "caller-name",
+						"value": "POSTMAN",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8083/api/v1/customer-information/{{encryptedString}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"v1",
+						"customer-information",
+						"{{encryptedString}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"postman.setEnvironmentVariable(\"access_token\",jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "requestDate",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "caller-name",
+						"value": "POSTMAN",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "microservices_client",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "microservices_user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "microservices",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "vLQMi9J7jpOZI8AFM0ZY0wgpOqrdR4x1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8181/realms/demo-realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"realms",
+						"demo-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "encrypt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"postman.setEnvironmentVariable(\"encryptedString\",jsonData.encryptedString);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "requestId",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "requestDate",
+						"value": "77392336-0e48-4244-9a44-7ed43bcd4647",
+						"type": "text"
+					},
+					{
+						"key": "caller-name",
+						"value": "POSTMAN",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8084/api/v1/encrypt?data=12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"v1",
+						"encrypt"
+					],
+					"query": [
+						{
+							"key": "data",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

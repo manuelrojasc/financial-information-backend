@@ -1,0 +1,36 @@
+info:
+  version: "@project.version@"
+  title: Customer api
+
+server:
+  port: 8081
+
+
+spring:
+  profiles.active: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://host.docker.internal:8181/realms/demo-realm/protocol/openid-connect/certs
+  webflux:
+    base-path: /api/v1
+  data:
+    mongodb:
+      database: ${DATABASE_NAME:customer}
+      uri: ${DATABASE_URI:mongodb+srv://marcnice12:you_password@cluster0.ukrli.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0}
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    url: /swagger.yaml
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    com.financial: DEBUG
+  date-format: yyyy-MM-dd HH:mm:ss
+

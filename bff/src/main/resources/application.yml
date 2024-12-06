@@ -1,0 +1,48 @@
+info:
+  version: "@project.version@"
+  title: Customer Financial Products api
+
+server:
+  port: 8083
+
+spring:
+  profiles.active: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://host.docker.internal:8181/realms/demo-realm/protocol/openid-connect/certs
+  webflux:
+    base-path: /api/v1
+
+encryption:
+  secret-key: "TXLrNhQOgmrkAs8m"  # Clave de 16 caracteres
+  algorithm: "AES/ECB/PKCS5Padding"
+  base-algorithm: "AES"
+
+microservice:
+  customer:
+    base-url: http://host.docker.internal:8081/api/v1/customer/
+  products:
+    base-url: http://host.docker.internal:8082/api/v1/financial-products/
+
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    url: /swagger.yaml
+
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.financial: DEBUG
+    org.springframework.security: DEBUG
+
+
+  date-format: yyyy-MM-dd HH:mm:ss
+

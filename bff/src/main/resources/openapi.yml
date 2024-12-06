@@ -1,0 +1,72 @@
+openapi: '3.0.3'
+info:
+  version: 1.0.0
+  title: Simple Customer Financial Products Information
+servers:
+  - url: http://localhost/8083/api/v1
+paths:
+  /customer-information/{codigoUnico}:
+    get:
+      summary: "Retrieve Customer Financial Products"
+      description: "Returns a Customer financial products"
+      operationId: "getCustomerFinancialProducts"
+      parameters:
+        - name: codigoUnico
+          in: path
+          description: Código único para identificar al cliente.
+          required: true
+          schema:
+            type: string
+            maxLength: 8
+            pattern: "^[a-zA-Z0-9]{8}$"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProductsInformationResponse'
+        "400":
+          description: Bad Request
+components:
+  schemas:
+    CustomerHeaders:
+      type: object
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          example: "String"
+    FinancialProducts:
+      type: object
+      properties:
+        productType:
+          type: string
+          example: "cuenta"
+        nombre:
+          type: string
+          example: "corriente Soles"
+        saldo:
+          type: string
+          example: "999.99"
+    CustomerProductsInformationResponse:
+      type: object
+      properties:
+        nombre:
+          type: string
+          example: "Marc"
+        apellidos:
+          type: string
+          example: "perez saja"
+        tipoDocumento:
+          type: string
+          example: "dni"
+        numeroDocumento:
+          type: string
+          example: "12345678"
+        products:
+          type: array
+          description: "Lista de productos financieros"
+          items:
+            $ref: '#/components/schemas/FinancialProducts'
